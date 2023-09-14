@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>
+        هل بايثون لديها
+        block scope؟
+    </title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">
+            هل بايثون لديها
+            block scope؟
+        </h1>
+        <div class="content">
+            <p>
+                على عكس بعض لغات البرمجة ان جئت من
+                c++
+                او
+                java
+                لايوجد هناك
+                block scope
+                في بايثون
+            </p>
+            <p>
+                معنى هذا انه مثلا لو اردت كتابة عبارة
+                if
+                وعرفت متغير جديد داخلها او داخل حلقة
+                while
+                او
+                for
+                هذه لاتعتبر ك سور بالنسبة للمتغير كما في المثال في الدرس السابق
+                سيكون لدى ذلك المتغير نفس نطاق الدالة التي عرف فيها وان لم يعرف
+                داخل دالة اذن لديه نطاق عام
+            </p>
+            <pre><code>
+if 3 > 2:
+    a_var = 2 
+            </code></pre>
+            <p>
+                لاحظ هذا المثال:
+            </p>
+            <pre><code>
+game_level = 3
+enemies = ["Skeleton", "Zombie", "Alien"]
+if game_level < 5:
+    new_enemy = enemies[0]
+
+print(new_enemy)
+            </code></pre>
+            <p>
+                لاحظ انني قمت بتعريف المتغير
+                new_enemy
+                داخل عبارة ال
+                if
+                ولكن استطعت ان استخدم ذلك المتغير خارجها وقمت بطباعته وهذا كود صحيح
+            </p>
+            <pre><code>
+game_level = 3
+
+
+def create_enemy():
+    enemies = ["Skeleton", "Zombie", "Alien"]
+    if game_level < 5:
+        new_enemy = enemies[0]
+
+
+print(new_enemy)
+                            </code></pre>
+            <p>
+                بينما لو كان داخل دالة فهذا الكود لم يعد صحيح ولن تستطيع
+                طباعة المتغير
+                new_enemy
+                لان نطاقه اصبح نطاق محلي الخاص بالدالة وهو متاح فقك داخلها
+            </p>
+            <p>
+                ونفس الشيء ينطبق مع
+                while
+                او
+                for
+            </p>
+            <p>
+                الشيء المهم الذي عليك تذكره هو عندما تقوم مثلا بتعريف متغير داخل دالة
+                فهو متاح فقط داخل تلك الدالة اما اذا قمت بتعريفه داخل 
+                عبارة 
+                if 
+                او حلقة 
+                while 
+                او 
+                for 
+                فذلك لايعتبر نطاقا محليا
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
