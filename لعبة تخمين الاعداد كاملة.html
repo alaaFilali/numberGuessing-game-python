@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>لعبة تخمين الاعداد كاملة</title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">لعبة تخمين الاعداد كاملة</h1>
+        <div class="content">
+            <p>
+                اتمنى انك قمت باكمال اللعبة وجئت فقط للتحقق من الكود الخاص بي,
+                مرة اخرى اذا لم تعطي اللعبة الوقت الكافي ساعة او اكثر اشجعك ان
+                تكمل في بناء اللعبة ولا تستسلم بسهولة وتذكر دائما انك سوف تطور
+                من نفسك ومن قدرتك على البرمجة كلما تواجه مشاكل وتتخطاها,
+                يمكنك ان تشاهد الناس تبرمج امامك وتكتب الكود طوال اليوم ولن تتعلم شيئا
+                الا اذا حاولت بنفسك وواجهة صعوبات, حتى وان حاولت ولم تستطع حاول مرة
+                اخرى ومرة اخرى حتى تنجح ولا تفقد الامل بسهولة.
+            </p>
+            <p>
+                الان سوف نبدأ في برمجة لعبة اليوم, ولو تلاحظ في نتيجة الكود النهائية التى
+                اريتك اياها في الدرس السابق يمكن تقسيم اللعبة الى اجزاء ومحاولة
+                اكمالها واحدة بواحدة وهذا سبب من ان الناس تخاف ان تبدأ في بناء مشروع
+                الخوف من البداية لان اللعبة او المشروع يبدو كبيرا ولكن عندما تقسمه
+                فانه يبدو سهلا وقابل للتطبيق
+            </p>
+            <p>
+                مثلا نبدأ في التفكير في كيفية اختيار رقم عشوائي بين
+                1
+                و
+                100
+                ثم نكتب دالة تقوم بتحديد صعوبة اللعبة
+                ثم بعدها ندع اللاعب يقوم باختيار عدد
+                ونحتاج ايضا على الارجح الى دالة تتحقق من صحة نتيجة اللاعب
+                وعلينا ايضا ان نتتبع عدد المحاولات الباقية لللاعب ونتيح له
+                ان يعيد عملية ادخال الاعداد حتى يصل الى الاجابة الصحيحة او يخسر ان
+                انتهت محاولاته بناءا على صعوبة اللعبة التي اختارها
+            </p>
+            <p>
+                نبدأ بالاسهل وهي اختيار عدد عشوائي بين
+                1
+                و
+                100
+                عن طريق مكتبة
+                random
+            </p>
+            <pre><code>
+from random import randint
+
+answer = randint(1, 100)
+            </code></pre>
+            <p>
+                سوف اضيف ايضا بعض الرسائل للعبة
+            </p>
+            <pre><code>
+print("Welcome to the Number Guessing Game!")
+print("I'm thinking of a number between 1 and 100.")
+            </code></pre>
+            <p>
+                الان سوف نطلب من اللاعب ان يدخل عدد ويقوم بحزر العدد والاجابة الصحيحة
+                عن طريق دالة
+                input
+            </p>
+            <pre><code>
+guess = int(input("Make a guess: "))
+            </code></pre>
+            <p>
+                الان ربما هو الوقت المناسب لكتابة دالة تساعدنا في التحقق من صحة
+                الاجابة التي ادخلها اللاعب
+                ومن الافضل دائما كتابة الدوال في بداية الملف حتى يمكنك مناداتها في
+                اي مكان في الاسفل في الملف الخاص بك
+            </p>
+            <pre><code>
+def check_answer(guess, answer):
+    if guess > answer:
+        print("Too high")
+    elif guess < answer:
+        print("Too low")
+    else:
+        print(f"You got it! The answer was {answer}.")
+            </code></pre>
+            <p>
+                سوف نكتب دالة اخرى تقوم بتحديد الصعوبة في اللعبة بحيث سوف نسأل المستخدم
+                اي صعوبة يريد وبناءا على ذلك سوف نحدد الصعوبة وكما تلاحظ هذه الصعوبة
+                تحدد مرة واحدة ولاتغير حتى نهاية البرنامج اذن هذا وقت رائع لاضافة
+                ثابت في اعلى الملف جنبا الى جنب مع الدوال و المكتبات لان الثوابت
+                تستعمل في اماكن كثيرة في الملف واذا صعدنا الى قمة الملف
+                وسوف نجد جميع الثوابت الخاصة بنا
+            </p>
+            <pre><code>
+EASY_LEVEL_TURNS = 10
+HARD_LEVEL_TURNS = 5
+            </code></pre>
+            <pre><code>
+def set_difficulty():
+    level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+    if level = "easy":
+        turns = EASY_LEVEL_TURNS
+    else:
+        turns = HARD_LEVEL_TURNS
+            </code></pre>
+            <p>
+                ولكن المتغير
+                turns
+                بدون فائدة لان نطاقه محلي وانا اريد الوصول اليه في اللعبة الخاصة بي
+                وان اري لللاعب عدد المحاولات المتبقية له لذلك بدل المتغير من الافضل ارجاع
+                عدد المحاولات كمخرج للدالة وتخزينه في متغير
+                turns
+            </p>
+            <pre><code>
+def set_difficulty():
+    level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+    if level = "easy":
+        return EASY_LEVEL_TURNS
+    else:
+        return HARD_LEVEL_TURNS
+
+
+turns = set_difficulty()
+print(f"You have {turns} attempts remaining to guess the number.")
+            </code></pre>
+            <p>
+                هذا الكود الذي كتبناه حتى الان ومن الافضل تجريبه قبل الاكمال في برمجة
+                هذه اللعبة
+            </p>
+            <pre><code>
+from random import randint
+
+EASY_LEVEL_TURNS = 10
+HARD_LEVEL_TURNS = 5
+
+
+def check_answer(guess, answer):
+    if guess > answer:
+        print("Too high")
+    elif guess < answer:
+        print("Too low")
+    else:
+        print(f"You got it! The answer was {answer}.")
+
+
+def set_difficulty():
+    level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+    if level = "easy":
+        return EASY_LEVEL_TURNS
+    else:
+        return HARD_LEVEL_TURNS
+
+
+print("Welcome to the Number Guessing Game!")
+print("I'm thinking of a number between 1 and 100.")
+answer = randint(1, 100)
+print(f"Pssst, the correct answer is {answer}")
+
+turns = set_difficulty()
+print(f"You have {turns} attempts remaining to guess the number.")
+guess = int(input("Make a guess: "))
+            </code></pre>
+            <p>
+                نتيجة الكود كما هو: واضفت ايضا عبارة طباعة تخبرني بالنتيجة الصحيحة لكي يسهل على
+                تجريب جميع الحالات
+            </p>
+            <pre><code>
+Welcome to the Number Guessing Game!
+I'm thinking of a number between 1 and 100.
+Pssst, the correct answer is 63
+Choose a difficulty. Type 'easy' or 'hard': hard
+You have 5 attempts remaining to guess the number.
+Make a guess: 50
+            </code></pre>
+            <p>
+                الان لو قررت في اي مرحلة ان عدد المحاولات في النمط الصعب ليس مناسب
+                ربما
+                7
+                مناسب اذن في تلك الحالة اصعد الى قمة الملف وسوف تجد الثابت حروفه كلها كبيرة
+                قم بتغيير قيمته وذلك التغيير سوف ينعكس على كامل الكود
+            </p>
+            <p>
+                بينما قمنا بكتابة دالة التحقق من الاجابة لكننا لم نقم بمناداتها
+            </p>
+            <pre><code>
+...
+guess = int(input("Make a guess: "))
+
+check_answer(guess, answer)
+            </code></pre>
+            <p>
+                نتيجة الكود الان: وسوف اختار النمط السهل الان لكي اكون قد جربت كل انماط اللعبة
+            </p>
+            <pre><code>
+Welcome to the Number Guessing Game!
+I'm thinking of a number between 1 and 100.
+Pssst, the correct answer is 32
+Choose a difficulty. Type 'easy' or 'hard': easy
+You have 10 attempts remaining to guess the number.
+Make a guess: 50
+Too high. 
+            </code></pre>
+            <p>
+                الان بعد ما تحقق من صحة الاجابة لا يمكنني ان اختار عدد اخر لقد قام بانهاء البرنامج
+                كيف يمكننا ان نجعل اللاعب يعيد ادخال عدد اخر حتى تنتهي محاولاته ويخسر او يربح بان يحزر الاجابة الصحيحة؟
+            </p>
+            <p>
+                من الارجح اننا نحتاج حلقة
+                while
+                وشرطها سوف يكون مادام ان اللاعب لم يدخل الاجابة الصحيحة
+            </p>
+            <pre><code>
+while guess != answer:
+    guess = int(input("Make a guess: "))
+    check_answer(guess, answer)
+            </code></pre>
+            <p>
+                ولكننا في هذه الحالة نستعمل متغير في شرط الحلقة قبل ان يتم تعريفه
+                داخل الحلقة لذلك سوف نعرفه قبل الحلقة
+            </p>
+            <pre><code>
+guess = 0
+while guess != answer:
+    guess = int(input("Make a guess: "))
+    check_answer(guess, answer)
+                            </code></pre>
+            <p>
+                الان لو تلاحظ المتغيرات
+                guess
+                و
+                turns
+                و
+                answer
+                اصبحت ذات نطاق عام فمن الافضل ان نجعلها داخل دالة
+                game
+                ونقوم بمناداتها
+            </p>
+            <pre><code>
+def game():
+    print("Welcome to the Number Guessing Game!")
+    print("I'm thinking of a number between 1 and 100.")
+    answer = randint(1, 100)
+    print(f"Pssst, the correct answer is {answer}")
+
+    turns = set_difficulty()
+    print(f"You have {turns} attempts remaining to guess the number.")
+    guess = 0
+    while guess != answer:
+        guess = int(input("Make a guess: "))
+        check_answer(guess, answer)
+
+
+game()
+            </code></pre>
+            <p>
+                نتيجة الكود الان كما هو:
+            </p>
+            <pre><code>
+Welcome to the Number Guessing Game!
+I'm thinking of a number between 1 and 100.
+Pssst, the correct answer is 90
+Choose a difficulty. Type 'easy' or 'hard': easy
+You have 10 attempts remaining to guess the number.
+Make a guess: 50
+Too low. 
+Make a guess: 95
+Too high. 
+Make a guess: 90
+You got it! The answer was 90.
+            </code></pre>
+            <p>
+                الان الشيء الوحيد الذي تبقى هو تتبع عدد المحاولات المتبقية للاعب
+            </p>
+            <p>
+                والمكان الذي نفعل فيه ذلك هو الدالة
+                check_answer
+                عندما يكون العدد اكبر من الاجابة او اقل منها يجب بطريقة ما
+                ان ننقص عدد المحاولات المتبقية وربما تغيير متغير ذو نطاق عام هي
+                واحدة من الطرف لفعل ذلك ولكن كما قلنا ليس افضل طريقة لفعل ذلك
+            </p>
+            <p>
+                يمكننا ان نمرر عدد المحاولات كمدخل للدالة ونرجعه ناقص واحد
+            </p>
+            <pre><code>
+def check_answer(guess, answer, turns):
+    if guess > answer:
+        print("Too high")
+        return turns - 1
+    elif guess < answer:
+        print("Too low")
+        return turns - 1
+    else:
+        print(f"You got it! The answer was {answer}.")
+            </code></pre>
+            <p>
+                الان عندما ننادي الدالة نمرر عدد المحاولات والمخرج الخاص بالدالة
+                نجعله القيمة الجديدة للمتغير
+                turns
+                اي اننا حدثنا قيمته
+            </p>
+            <pre><code>
+    while guess != answer:
+        guess = int(input("Make a guess: "))
+        turns = check_answer(guess, answer, turns)
+            </code></pre>
+            <p>
+                الان لو اجرب اللعبة الخاصة بي واحاول ان اكمل جميع المحاولات بدون ان
+                اجيب بالاجابة الصحيحة الاحظ ان اللعبة ال تتوقف اضافة الى انه لايخبرني
+                بعدد المحاولات المتبقية كلما ادخلت عدد جديد
+            </p>
+            <p>
+                اي شيء نريده ان يتكرر يجب ان يذهب داخل الحلقة
+                while
+                اي ننقل طباعة عدد المرات من خارج الحلقة الى داخلها
+            </p>
+            <pre><code>
+    while guess != answer:
+        print(f"You have {turns} attempts remaining to guess the number.")
+        guess = int(input("Make a guess: "))
+        turns = check_answer(guess, answer, turns)
+                        </code></pre>
+            <p>
+                الان نريد من الحلقة ان تتوقف عندما يصحب عدد المحاولات 
+                0
+            </p>
+            <pre><code>
+    while guess != answer:
+        print(f"You have {turns} attempts remaining to guess the number.")
+        guess = int(input("Make a guess: "))
+        turns = check_answer(guess, answer, turns)
+        if turns == 0:
+            print("You've run out of guesses, you lose.")
+            </code></pre>
+            <p>
+                ولكن طباعة انه لم يبقى لديه اي محاولات لن يوقفه من ادخال اعداد اخرى
+            </p>
+            <p>
+                تذكر اننا في داخل الدالة 
+                game 
+                ويمكننا الارجاع داخل الدالة بمخرج او بدون وذلك سوف ينهي الدالة
+                اذن لكي ينهي الحلقة والحلقة داخل الدالة اذن سوف ننهي الدالة
+            </p>
+            <pre><code>
+    while guess != answer:
+        print(f"You have {turns} attempts remaining to guess the number.")
+        guess = int(input("Make a guess: "))
+        turns = check_answer(guess, answer, turns)
+        if turns == 0:
+            print("You've run out of guesses, you lose.")
+            return
+                        </code></pre>
+                        <p>
+                            الكود كاملا: 
+                        </p>
+                        <pre><code>
+from random import randint
+
+EASY_LEVEL_TURNS = 10
+HARD_LEVEL_TURNS = 5
+
+
+def check_answer(guess, answer, turns):
+    if guess > answer:
+        print("Too high")
+        return turns - 1
+    elif guess < answer:
+        print("Too low")
+        return turns - 1
+    else:
+        print(f"You got it! The answer was {answer}.")
+
+
+def set_difficulty():
+    level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+    if level = "easy":
+        return EASY_LEVEL_TURNS
+    else:
+        return HARD_LEVEL_TURNS
+
+
+def game():
+    print("Welcome to the Number Guessing Game!")
+    print("I'm thinking of a number between 1 and 100.")
+    answer = randint(1, 100)
+    # print(f"Pssst, the correct answer is {answer}")
+
+    turns = set_difficulty()
+    
+    guess = 0
+    while guess != answer:
+        print(f"You have {turns} attempts remaining to guess the number.")
+        guess = int(input("Make a guess: "))
+        turns = check_answer(guess, answer, turns)
+        if turns == 0:
+            print("You've run out of guesses, you lose.")
+            return
+    
+    
+game()
+                        </code></pre>
+        </div>
+    </div>
+</body>
+
+</html>

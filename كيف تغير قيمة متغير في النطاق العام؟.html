@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>كيف تغير قيمة متغير في النطاق العام؟</title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">كيف تغير قيمة متغير في النطاق العام؟</h1>
+        <div class="content">
+            <p>
+                سوف نعود الى مثالنا الاول وسوف نتحدث اكثر عن النطاق العام وكيف نغير
+                شيء ما في النطاق العام
+            </p>
+            <pre><code>
+enemies = 1
+
+
+def increase_enemies():
+    enemies = 2
+    print(f"enemies inside the function: {enemies}")
+
+
+increase_enemies()
+print(f"enemies outsite the function: {enemies}")
+           </code></pre>
+            <p>
+                لدينا متغير
+                enemies
+                ولدينا دالة وفي داخلها نحن نظن اننا نقوم بتغيير قيمة المتغير
+                enemies
+                الاول ولكن في الحقيقة نحن نقوم بصناعة متغير جديد تماما ومنفصل عن الاول
+                لان الاول لديه نطاق عام بينما الثاني نطاقه داخل الدالة
+                وهذا هو سبب نتيجة الكود السابقة
+            </p>
+            <pre><code>
+enemies inside the function: 2
+enemies outsite the function: 1
+                        </code></pre>
+            <p>
+                عادة هي فكرة سيئة جدا ان تقوم بتسمية المتغيرات
+                ذات النطاق العام والمحلي نفس الشيء ولكننا في الحقيقة
+                لم نرد ان نصنع متغير جديد وانما اردنا تغيير قيمة المتغير
+                ذو النطاق العام داخل الدالة
+            </p>
+            <p>
+                ولفعل ذلك علينا ان نقول بكل وضوح داخل الدالة اننا نريد استخدام 
+                هذا المتغير ذو النطاق العام داخل الدالة باستخدام الكلمة 
+                global
+            </p>
+            <pre><code>
+enemies = 1
+
+
+def increase_enemies():
+    global enemies
+    enemies = 2
+    print(f"enemies inside the function: {enemies}")
+
+
+increase_enemies()
+print(f"enemies outsite the function: {enemies}")
+            </code></pre>
+            <p>
+                ولكن في الحقيقة انت لا تريد فعل ذلك لا تريد ان تغير قيمة متغير ذو نطاق عام 
+                لان ذلك قد يسبب مشاكل في الكود فيما بعد تخيل معي ان ذلك المتغير 
+                يستخدم في مكان اخر وانت قمت بتغيير قيمته هذا من شأنه ان يجعل الكود 
+                الخاص بك اكثر قابلية للفشل لذلك سوف تجد ان غالبية الناس المبتدئين في 
+                تعلم 
+                python 
+                لا ينصح بفعل ذلك
+            </p>
+            <p>
+                ولكن قد يسأل احدكم ما البدائل؟ اذا اردنا تحقيق نفس الشيء بدون تغيير قيمة متغير 
+                ذو نطاق عام؟ يمكنك استعمال ماتعلمته حول الدوال ذات المخرجات و 
+                عبارة 
+                return
+            </p>
+            <pre><code>
+enemies = 1
+
+
+def increase_enemies():
+    return enemies + 1
+
+
+print(f"enemies before: {enemies}")
+increase_enemies()
+print(f"enemies after: {enemies}")
+            </code></pre>
+        </div>
+    </div>
+</body>
+
+</html>
